@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MyIM</string>
+    <string name="user_name_hint">用户名</string>
+    <string name="pwd_hint">密码</string>
+</resources>
