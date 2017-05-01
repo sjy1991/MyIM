@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.pm.PackageManager;
 
+import com.avos.avoscloud.AVOSCloud;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 
@@ -15,9 +16,14 @@ import java.util.List;
  */
 
 public class MyApp extends Application {
+
+    private static final String APP_ID = "qAx8oDYFdCYxIV4nabIAlsPf-gzGzoHsz";
+    private static final String APP_KEY = "rLQEKA3vK4TbP2sXrM9edwpn";
+
     @Override
     public void onCreate() {
         super.onCreate();
+        AVOSCloud.initialize(this, APP_ID, APP_KEY);
         int pid = android.os.Process.myPid();
         String processAppName = getAppName(pid);
         // 如果APP启用了远程的service，此application:onCreate会被调用2次

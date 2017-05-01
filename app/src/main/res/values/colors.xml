@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryDark">@color/login_normal</color>
     <color name="colorAccent">#FF4081</color>
 
     <color name="login_normal">#00ACFF</color>
-    <color name="login_pressed">#00ACFF</color>
+    <color name="login_pressed">#00A1DB</color>
+
+    <color name="logout_normal">#FF0000</color>
+    <color name="logout_pressed">#DD0000</color>
+
+    <color name="in_active">#ABADBB</color>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.he.myim.module.Splash;
+package com.example.he.myim.module.splash;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import com.example.he.myim.MainActivity;
 import com.example.he.myim.R;
 import com.example.he.myim.base.BaseActivity;
-import com.example.he.myim.module.Login.LoginActivity;
+import com.example.he.myim.module.login.LoginActivity;
 
 public class SplashActivity extends BaseActivity implements SplashContract.SplashView {
     private ImageView iv_splash;
@@ -47,6 +47,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.Splas
                     startActivity(LoginActivity.class, true);
                 }
             });
+            alpha.start();
         }
     }
 }

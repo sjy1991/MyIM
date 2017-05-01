@@ -1,4 +1,4 @@
-package com.example.he.myim.module.Splash;
+package com.example.he.myim.module.splash;
 
 import com.hyphenate.chat.EMClient;
 

@@ -20,6 +20,15 @@ android {
 
     //use legacy for android 6.0
     useLibrary 'org.apache.http.legacy'
+
+    //为了解决部分第三方库重复打包了META-INF的问题
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
@@ -27,9 +36,32 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
+    // LeanCloud 基础包
+
+    // 推送与实时聊天需要的包compile ('cn.leancloud.android:avoscloud-push:v3.+@aar' ) {transitive = true}
+
+    // LeanCloud 统计包
+
+    // LeanCloud 用户反馈包
+
+    // avoscloud-sns：LeanCloud 第三方登录包
+    // 目前新浪微博官方只提供 jar 包的集成方式
+    // 请手动下载新浪微博 SDK 的 jar 包，将其放在 libs 目录下进行集成
+
+    // LeanCloud 应用内搜索包
+
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.hyphenate:hyphenate-sdk-lite:3.3.0'
-    testCompile 'junit:junit:4.12'
     compile 'com.android.support:design:25.3.1'
+    compile 'cn.leancloud.android:avoscloud-sdk:v3.+'
+    compile 'cn.leancloud.android:avoscloud-statistics:v3.+'
+    compile 'cn.leancloud.android:avoscloud-feedback:v3.+@aar'
+    compile 'cn.leancloud.android:avoscloud-sns:v3.+@aar'
+    compile 'cn.leancloud.android:qq-sdk:1.6.1-leancloud'
+    compile 'cn.leancloud.android:avoscloud-search:v3.+@aar'
+    compile 'com.ashokvarma.android:bottom-navigation-bar:1.4.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    testCompile 'junit:junit:4.12'
 }

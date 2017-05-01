@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/menu_add_friend" android:id="@+id/add_freiend" android:icon="@drawable/add_friend_pressed"/>
+    <item android:title="@string/menu_scan" android:id="@+id/scan" android:icon="@drawable/scan_pressed"/>
+    <item android:title="@string/menu_about_me" android:id="@+id/about_me" android:icon="@drawable/about"/>
+
+</menu>

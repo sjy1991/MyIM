@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/login_bk"
     android:orientation="vertical"
-    tools:context="com.example.he.myim.module.login.LoginActivity">
+    tools:context="com.example.he.myim.module.regist.RegistActivity">
 
     <ImageView
         android:id="@+id/iv_avatar"
@@ -15,7 +15,7 @@
         android:layout_height="@dimen/avatar_size"
         android:layout_gravity="center_horizontal"
         android:layout_margin="30dp"
-        android:src="@drawable/default_avatar"/>
+        android:src="@drawable/avatar3"/>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til_user"
@@ -35,8 +35,8 @@
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til_pwd"
-        android:layout_width="match_parent"
         app:passwordToggleEnabled="true"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <EditText
@@ -51,25 +51,17 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_regist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/login_btn_selector"
-        android:text="@string/btn_login_text"
+        android:text="@string/regist_btn_text"
         android:textColor="@android:color/white"
         android:textSize="@dimen/login_text_size"/>
 
-    <TextView
-        android:id="@+id/tv_new_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/login_new_user"
-        android:textColor="@color/login_normal"/>
+
 
 </LinearLayout>
