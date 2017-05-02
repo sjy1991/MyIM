@@ -1,4 +1,4 @@
-package com.example.he.myim;
+package com.example.he.myim.module.home;
 
 
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.he.myim.R;
 import com.example.he.myim.base.BaseFragment;
 
 

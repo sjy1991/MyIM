@@ -1,4 +1,4 @@
-package com.example.he.myim;
+package com.example.he.myim.module.home;
 
 import com.example.he.myim.base.BaseFragment;
 

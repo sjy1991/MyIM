@@ -1,4 +1,4 @@
-package com.example.he.myim;
+package com.example.he.myim.module.home;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.example.he.myim.R;
 import com.example.he.myim.base.BaseActivity;
 import com.example.he.myim.base.BaseFragment;
 

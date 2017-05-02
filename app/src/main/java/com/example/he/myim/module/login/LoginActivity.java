@@ -19,7 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.he.myim.MainActivity;
+import com.example.he.myim.module.home.MainActivity;
 import com.example.he.myim.R;
 import com.example.he.myim.base.BaseActivity;
 import com.example.he.myim.module.regist.RegistActivity;

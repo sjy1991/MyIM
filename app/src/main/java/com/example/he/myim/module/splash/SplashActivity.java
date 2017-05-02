@@ -6,7 +6,7 @@ import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-import com.example.he.myim.MainActivity;
+import com.example.he.myim.module.home.MainActivity;
 import com.example.he.myim.R;
 import com.example.he.myim.base.BaseActivity;
 import com.example.he.myim.module.login.LoginActivity;
