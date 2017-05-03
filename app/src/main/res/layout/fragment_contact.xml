@@ -4,10 +4,9 @@
              android:layout_height="match_parent"
              tools:context="com.example.he.myim.module.home.ContactFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.example.he.myim.widget.ContactLayout
+        android:id="@+id/contact_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="contact"/>
+        android:layout_height="match_parent"/>
 
 </FrameLayout>
