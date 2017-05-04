@@ -10,11 +10,13 @@ import android.view.ViewGroup;
 import com.example.he.myim.R;
 import com.example.he.myim.base.BaseFragment;
 
+import java.util.List;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ContactFragment extends BaseFragment {
+public class ContactFragment extends BaseFragment implements ContactContract.ContactView{
 
 
     public static ContactFragment newInstance(){
@@ -28,4 +30,8 @@ public class ContactFragment extends BaseFragment {
         return inflater.inflate(R.layout.fragment_contact, container, false);
     }
 
+    @Override
+    public void onQueryContract(List<String> list) {
+
+    }
 }
