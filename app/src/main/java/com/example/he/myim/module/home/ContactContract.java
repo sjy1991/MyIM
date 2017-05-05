@@ -8,10 +8,12 @@ import java.util.List;
 
 public interface ContactContract {
     interface ContactView{
-        void onQueryContract(List<String> list);
+        void onInitContract(List<String> contact);
+        void onUpdateContract(boolean isSuccess, String msg);
     }
 
     interface ContactPresenter{
-        List<String> queryContacts(String username);
+        void initContacts();
+        void upDataContacts(String username);
     }
 }

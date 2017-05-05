@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.example.he.myim.R;
 import com.example.he.myim.base.BaseFragment;
+import com.example.he.myim.widget.ContactLayout;
 
 import java.util.List;
 
@@ -17,7 +18,8 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class ContactFragment extends BaseFragment implements ContactContract.ContactView{
-
+    private ContactLayout mContactLayout;
+    private List<String> mContacts;
 
     public static ContactFragment newInstance(){
         return new ContactFragment();
@@ -26,12 +28,22 @@ public class ContactFragment extends BaseFragment implements ContactContract.Con
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contact, container, false);
+        // Inflate the layout for this fragmentz
+        View view = inflater.inflate(R.layout.fragment_contact, container, false);
+        mContactLayout = (ContactLayout) view.findViewById(R.id.contact_layout);
+        return view;
     }
 
     @Override
-    public void onQueryContract(List<String> list) {
+    public void onInitContract(List<String> list) {
+        mContacts = list;
 
     }
+
+    @Override
+    public void onUpdateContract(boolean isSuccess, String msg) {
+
+    }
+
+
 }
