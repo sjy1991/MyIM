@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.example.he.myim.R;
 import com.example.he.myim.base.BaseFragment;
+import com.example.he.myim.utils.ToastUtils;
 import com.example.he.myim.widget.ContactLayout;
 
 import java.util.List;
@@ -17,11 +18,12 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ContactFragment extends BaseFragment implements ContactContract.ContactView{
+public class ContactFragment extends BaseFragment implements ContactContract.ContactView {
     private ContactLayout mContactLayout;
     private List<String> mContacts;
+    private ContactAdapter mContactAdapter;
 
-    public static ContactFragment newInstance(){
+    public static ContactFragment newInstance() {
         return new ContactFragment();
     }
 
@@ -37,12 +39,19 @@ public class ContactFragment extends BaseFragment implements ContactContract.Con
     @Override
     public void onInitContract(List<String> list) {
         mContacts = list;
-
+        if (mContactAdapter == null) {
+            mContactAdapter = new ContactAdapter(mContacts, getContext());
+        }
+        mContactAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onUpdateContract(boolean isSuccess, String msg) {
-
+        if (isSuccess) {
+            mContactAdapter.notifyDataSetChanged();
+        }else {
+            ToastUtils.showToast(getContext(), msg);
+        }
     }
 
 
