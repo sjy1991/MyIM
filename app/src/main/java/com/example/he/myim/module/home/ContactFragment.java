@@ -20,8 +20,8 @@ import java.util.List;
  */
 public class ContactFragment extends BaseFragment implements ContactContract.ContactView {
     private ContactLayout mContactLayout;
-    private List<String> mContacts;
     private ContactAdapter mContactAdapter;
+    ContactContract.ContactPresenter mContactPresenter;
 
     public static ContactFragment newInstance() {
         return new ContactFragment();
@@ -31,17 +31,20 @@ public class ContactFragment extends BaseFragment implements ContactContract.Con
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragmentz
+        mContactPresenter = new ContactPresenterImpl(this);
         View view = inflater.inflate(R.layout.fragment_contact, container, false);
         mContactLayout = (ContactLayout) view.findViewById(R.id.contact_layout);
+        mContactPresenter.initContacts();
         return view;
     }
 
     @Override
     public void onInitContract(List<String> list) {
-        mContacts = list;
+
         if (mContactAdapter == null) {
-            mContactAdapter = new ContactAdapter(mContacts, getContext());
+            mContactAdapter = new ContactAdapter(list, getContext());
         }
+        mContactLayout.setAdapter(mContactAdapter);
         mContactAdapter.notifyDataSetChanged();
     }
 

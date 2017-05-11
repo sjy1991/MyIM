@@ -20,9 +20,10 @@
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
         android:textAllCaps="false"
+
         android:textColor="@android:color/white"
         android:textSize="40dp"
-        tools:text="M"/>
+        android:text="M"/>
 
     <com.example.he.myim.widget.SlideBar
         android:id="@+id/slidebar"

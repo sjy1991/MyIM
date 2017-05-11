@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.he.myim.R;
+import com.example.he.myim.utils.StringUtils;
 
 import java.util.List;
 
@@ -35,15 +36,20 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ContactHolder contactHolder = (ContactHolder) holder;
-        String s = mContactList.get(position);
+        String contact = mContactList.get(position);
+        String initial = StringUtils.getInitial(contact);
+
         if (position == 0) {
-            contactHolder.tv_contact.setText(s);
-            contactHolder.tv_init.setText(s.substring(0, 1));
+            contactHolder.tv_contact.setText(contact);
+            contactHolder.tv_init.setText(initial);
         } else {
-            String prefist = mContactList.get(position - 1);
-            if (s.equals(prefist)) {
-                contactHolder.tv_contact.setText(s);
+            String preFirst = StringUtils.getInitial(mContactList.get(position - 1));
+            if (initial.equalsIgnoreCase(preFirst)) {
+                contactHolder.tv_contact.setText(contact);
                 contactHolder.tv_init.setVisibility(View.GONE);
+            }else {
+                contactHolder.tv_contact.setText(contact);
+                contactHolder.tv_init.setText(StringUtils.getInitial(contact));
             }
         }
 
@@ -54,7 +60,7 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return mContactList == null ? 0 : mContactList.size();
     }
 
-    class ContactHolder extends RecyclerView.ViewHolder {
+    private class ContactHolder extends RecyclerView.ViewHolder {
         TextView tv_init;
         TextView tv_contact;
 

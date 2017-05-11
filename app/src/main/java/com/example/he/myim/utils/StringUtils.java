@@ -21,4 +21,12 @@ public class StringUtils {
         }
         return pwd.matches("^[0-9]{2,19}$");
     }
+
+
+    public static String getInitial(String contact){
+        if (TextUtils.isEmpty(contact)) {
+            return null;
+        }
+        return contact.substring(0, 1).toUpperCase();
+    }
 }

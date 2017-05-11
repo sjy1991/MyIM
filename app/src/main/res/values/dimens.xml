@@ -3,4 +3,7 @@
     <dimen name="avatar_size">60dp</dimen>
     <dimen name="login_text_size">22sp</dimen>
     <dimen name="logout_text_size">22dp</dimen>
+
+    <dimen name="avater_size">60dp</dimen>
+    <dimen name="avater_size_1">60dp</dimen>
 </resources>
