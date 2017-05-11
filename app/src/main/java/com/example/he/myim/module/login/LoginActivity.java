@@ -19,9 +19,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.he.myim.module.home.MainActivity;
 import com.example.he.myim.R;
 import com.example.he.myim.base.BaseActivity;
+import com.example.he.myim.module.home.MainActivity;
 import com.example.he.myim.module.regist.RegistActivity;
 import com.example.he.myim.utils.StringUtils;
 
@@ -56,8 +56,14 @@ public class LoginActivity extends BaseActivity implements LoginContract.LoginVi
         setContentView(R.layout.activity_login);
         init();
         mLoginPresente = new LoginPresenterImpl(this);
+
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        etUserName.requestFocus(View.FOCUS_RIGHT);
+    }
 
     public void login() {
         String user = etUserName.getText().toString().trim();
@@ -144,7 +150,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.LoginVi
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (R.id.et_pwd == v.getId()) {
                     if (EditorInfo.IME_ACTION_DONE == actionId) {
-
                         login();
                         return true;
                     }

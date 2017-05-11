@@ -1,5 +1,6 @@
 package com.example.he.myim.module.home;
 
+
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.he.myim.R;
+import com.example.he.myim.module.interfaze.IContactable;
 import com.example.he.myim.utils.StringUtils;
 
 import java.util.List;
@@ -16,7 +18,7 @@ import java.util.List;
  * Created by je on 06/05/17.
  */
 
-public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements IContactable {
     private List<String> mContactList;
     private Context mContext;
     private final LayoutInflater mInflater;
@@ -60,7 +62,16 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return mContactList == null ? 0 : mContactList.size();
     }
 
-    private class ContactHolder extends RecyclerView.ViewHolder {
+
+
+
+    @Override
+    public List<String> getDatas() {
+        return mContactList;
+    }
+
+    class ContactHolder extends RecyclerView.ViewHolder {
+
         TextView tv_init;
         TextView tv_contact;
 
