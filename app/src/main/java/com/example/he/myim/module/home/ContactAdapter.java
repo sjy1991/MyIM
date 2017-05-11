@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.he.myim.R;
+import com.example.he.myim.module.interfaze.IContactable;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
  * Created by je on 06/05/17.
  */
 
-public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements IContactable{
     private List<String> mContactList;
     private Context mContext;
     private final LayoutInflater mInflater;
@@ -52,6 +53,11 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public int getItemCount() {
         return mContactList == null ? 0 : mContactList.size();
+    }
+
+    @Override
+    public List<String> getDatas() {
+        return mContactList;
     }
 
     class ContactHolder extends RecyclerView.ViewHolder {

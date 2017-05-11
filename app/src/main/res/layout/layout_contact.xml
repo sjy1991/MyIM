@@ -22,6 +22,7 @@
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="40dp"
+        android:visibility="gone"
         tools:text="M"/>
 
     <com.example.he.myim.widget.SlideBar
