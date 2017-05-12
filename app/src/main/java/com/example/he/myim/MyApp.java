@@ -5,9 +5,13 @@ import android.app.Application;
 import android.content.pm.PackageManager;
 
 import com.avos.avoscloud.AVOSCloud;
+import com.example.he.myim.evenbus.User;
 import com.example.he.myim.utils.DbUtil;
+import com.hyphenate.EMContactListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Iterator;
 import java.util.List;
@@ -46,6 +50,41 @@ public class MyApp extends Application {
         EMClient.getInstance().setDebugMode(true);
 
         DbUtil.init(this);
+
+        initFriendsListener();
+    }
+
+    private void initFriendsListener() {
+
+        EMClient.getInstance().contactManager().setContactListener(new EMContactListener() {
+
+            @Override
+            public void onContactAdded(String username) {
+                //增加了联系人时回调此方法
+            }
+
+            @Override
+            public void onContactDeleted(String username) {
+                //被删除时回调此方法
+                EventBus.getDefault().post(new User(username));
+            }
+
+            @Override
+            public void onContactInvited(String username, String reason) {
+                //收到好友邀请
+            }
+
+            @Override
+            public void onFriendRequestAccepted(String username) {
+                //好友请求被同意
+                EventBus.getDefault().post(new User(username));
+            }
+
+            @Override
+            public void onFriendRequestDeclined(String username) {
+                //好友请求被拒绝
+            }
+        });
     }
 
     private String getAppName(int pID) {

@@ -1,6 +1,7 @@
 package com.example.he.myim.widget;
 
 import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -19,6 +20,7 @@ public class ContactLayout extends RelativeLayout {
     private SlideBar mSlideBar;
     private TextView mTv_fitst;
     private RecyclerView mRecyclerView;
+    private SwipeRefreshLayout mRefreshLayout;
 
     public ContactLayout(Context context) {
         this(context, null);
@@ -31,6 +33,8 @@ public class ContactLayout extends RelativeLayout {
         mSlideBar = (SlideBar) findViewById(R.id.slidebar);
         mRecyclerView = (RecyclerView) findViewById(R.id.contact_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        mRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.contact_refresh);
+        mRefreshLayout.setColorSchemeResources(R.color.colorAccent);
     }
 
     public ContactLayout(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -40,5 +44,14 @@ public class ContactLayout extends RelativeLayout {
     public void setAdapter(RecyclerView.Adapter adapter){
         mRecyclerView.setAdapter(adapter);
     }
+
+    public void setRefreshLayoutListener(SwipeRefreshLayout.OnRefreshListener onRefreshListener){
+        mRefreshLayout.setOnRefreshListener(onRefreshListener);
+    }
+
+    public void onRefresh(boolean isRefresh){
+        mRefreshLayout.setRefreshing(isRefresh);
+    }
+
 
 }
