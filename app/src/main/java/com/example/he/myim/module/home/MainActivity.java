@@ -1,5 +1,6 @@
 package com.example.he.myim.module.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -88,6 +89,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
             case R.id.add_freiend:
                 // TODO: 17-5-1 跳转添加好友界面
+                startActivity(AddFriendActivity.class, false);
                 break;
 
             case  R.id.scan:

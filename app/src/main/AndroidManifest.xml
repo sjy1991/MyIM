@@ -46,6 +46,7 @@
         <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+
                 <data android:scheme="package"/>
             </intent-filter>
             <!-- 可选filter -->
@@ -64,10 +65,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-        <activity android:name=".module.login.LoginActivity" android:launchMode="singleTask"/>
-
+        <activity
+            android:name=".module.login.LoginActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".module.regist.RegistActivity"/>
+        <activity android:name=".module.home.AddFriendActivity">
+        </activity>
     </application>
 
 </manifest>

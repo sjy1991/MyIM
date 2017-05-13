@@ -35,6 +35,7 @@ public class ContactPresenterImpl implements ContactContract.ContactPresenter {
 
     /**
      * 更新服务器数据
+     *
      * @param username
      */
     @Override
@@ -74,5 +75,32 @@ public class ContactPresenterImpl implements ContactContract.ContactPresenter {
 
             }
         });
+    }
+
+    @Override
+    public void deleteContact(final String contact, int position) {
+        try {
+            EMClient.getInstance().contactManager().deleteContact(contact);
+            handlerDeleteContact(contact, true, null);
+        } catch (final HyphenateException e) {
+            e.printStackTrace();
+            handlerDeleteContact(contact, false, e.getMessage());
+        }
+    }
+
+    public void handlerDeleteContact(final String contact, final boolean isSuccess, final String
+            msg) {
+        ThreadUtils.runOnMainThread(new Runnable() {
+            @Override
+            public void run() {
+                if (isSuccess) {
+                    mContactView.onDeleteContact(contact, true, null);
+                } else {
+                    mContactView.onDeleteContact(contact, false, msg);
+                }
+            }
+        });
+
+
     }
 }

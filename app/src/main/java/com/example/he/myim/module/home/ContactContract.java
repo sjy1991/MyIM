@@ -10,10 +10,14 @@ public interface ContactContract {
     interface ContactView{
         void onInitContract(List<String> contact);
         void onUpdateContract(boolean isSuccess, String msg);
+
+        void onDeleteContact(String contact, boolean isSuccess, String msg);
     }
 
     interface ContactPresenter{
         void initContacts();
         void upDataContacts(String username);
+        void deleteContact(String contact, int position);
     }
+
 }

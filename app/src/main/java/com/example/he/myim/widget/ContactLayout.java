@@ -49,6 +49,7 @@ public class ContactLayout extends RelativeLayout {
         mRefreshLayout.setOnRefreshListener(onRefreshListener);
     }
 
+
     public void onRefresh(boolean isRefresh){
         mRefreshLayout.setRefreshing(isRefresh);
     }

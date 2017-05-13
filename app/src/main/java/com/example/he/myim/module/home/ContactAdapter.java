@@ -22,6 +22,7 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private List<String> mContactList;
     private Context mContext;
     private final LayoutInflater mInflater;
+    private OnItemClickListener mOnItemClickListener;
 
     public ContactAdapter(List<String> contactList, Context context) {
         mContactList = contactList;
@@ -36,11 +37,28 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         ContactHolder contactHolder = (ContactHolder) holder;
-        String contact = mContactList.get(position);
+        final String contact = mContactList.get(position);
         String initial = StringUtils.getInitial(contact);
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (mOnItemClickListener != null) {
+                    mOnItemClickListener.onItemLongClick(contact, position);
+                }
+                return true;
+            }
+        });
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnItemClickListener != null) {
+                    mOnItemClickListener.onItemClick(contact, position);
+                }
+            }
+        });
         if (position == 0) {
             contactHolder.tv_contact.setText(contact);
             contactHolder.tv_init.setText(initial);
@@ -63,8 +81,6 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
 
-
-
     @Override
     public List<String> getDatas() {
         return mContactList;
@@ -81,4 +97,21 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             tv_contact = (TextView) itemView.findViewById(R.id.tv_contact);
         }
     }
+
+    public interface OnItemClickListener{
+        void onItemLongClick(String contact, int position);
+        void onItemClick(String contact, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        if (onItemClickListener != null) {
+            mOnItemClickListener = onItemClickListener;
+        }
+    }
+
+
+
+
+
+
 }
