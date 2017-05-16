@@ -2,6 +2,7 @@ package com.example.he.myim.module.home;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ public class AddFriendActivity extends BaseActivity {
     private Toolbar mToolbar;
     private ImageView mIv_nodata;
     private RecyclerView mRv_add;
+    private SearchView mSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class AddFriendActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_serach, menu);
+        mSearchView = (SearchView) menu.findItem(R.menu.menu_serach);
         return true;
     }
 
@@ -48,6 +51,6 @@ public class AddFriendActivity extends BaseActivity {
             case R.id.contact_serach:
                 break;
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 }
