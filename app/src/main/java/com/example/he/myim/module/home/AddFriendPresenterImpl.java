@@ -6,7 +6,6 @@ import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
 import com.example.he.myim.evenbus.User;
 import com.example.he.myim.utils.DbUtil;
-import com.example.he.myim.utils.ThreadUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -45,12 +44,8 @@ public class AddFriendPresenterImpl implements AddFriendContract.AddFriendPresen
 
                         }
                         final List<String> strings = DbUtil.queryContacts(username);
-                        ThreadUtils.runOnMainThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                mAddFriendView.onQueryResult(userList, true, null, strings);
-                            }
-                        });
+
+                        mAddFriendView.onQueryResult(userList, true, null, strings);
 
                     }
                 });

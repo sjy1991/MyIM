@@ -1,9 +1,11 @@
 package com.example.he.myim.module.home;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -40,6 +42,7 @@ public class AddFriendActivity extends BaseActivity implements AddFriendContract
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mAddFriendPresenter = new AddFriendPresenterImpl(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_friends);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
@@ -51,13 +54,16 @@ public class AddFriendActivity extends BaseActivity implements AddFriendContract
 
             @Override
             public boolean onQueryTextSubmit(String query) {
+                if (TextUtils.isEmpty(query)) {
+                    showToast("请输入搜索关键字！");
+                    return false;
+                }
                 mAddFriendPresenter.QueryContact(getUserName(), query);
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                showToast(newText);
                 return true;
             }
         });
