@@ -7,6 +7,13 @@ package com.example.he.myim.evenbus;
 public class User {
     public String userName;
 
+    public User(String userName, String date) {
+        this.userName = userName;
+        this.date = date;
+    }
+
+    public String date;
+
     public User(String userName) {
         this.userName = userName;
     }
