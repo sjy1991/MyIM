@@ -61,6 +61,7 @@ public class MyApp extends Application {
             @Override
             public void onContactAdded(String username) {
                 //增加了联系人时回调此方法
+                EventBus.getDefault().post(new User(username));
             }
 
             @Override

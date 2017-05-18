@@ -1,4 +1,4 @@
-package com.example.he.myim.module.home;
+package com.example.he.myim.module.home.plugin;
 
 /**
  * Created by he on 17-5-2.

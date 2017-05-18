@@ -1,4 +1,4 @@
-package com.example.he.myim.module.home;
+package com.example.he.myim.module.home.plugin;
 
 
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import com.example.he.myim.R;
 import com.example.he.myim.base.BaseFragment;
+import com.example.he.myim.module.home.MainActivity;
 import com.example.he.myim.module.login.LoginActivity;
 import com.example.he.myim.utils.ToastUtils;
 

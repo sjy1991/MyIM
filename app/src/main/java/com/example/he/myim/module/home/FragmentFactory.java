@@ -1,6 +1,9 @@
 package com.example.he.myim.module.home;
 
 import com.example.he.myim.base.BaseFragment;
+import com.example.he.myim.module.home.contact.ContactFragment;
+import com.example.he.myim.module.home.conversation.ConversationFragment;
+import com.example.he.myim.module.home.plugin.PluginFragment;
 
 /**
  * Fragment工厂类

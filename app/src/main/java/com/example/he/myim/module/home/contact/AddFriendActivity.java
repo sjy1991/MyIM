@@ -1,4 +1,4 @@
-package com.example.he.myim.module.home;
+package com.example.he.myim.module.home.contact;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
 import com.example.he.myim.R;
@@ -43,6 +45,8 @@ public class AddFriendActivity extends BaseActivity implements AddFriendContract
         mAddFriendPresenter = new AddFriendPresenterImpl(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_friends);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
     }
 
     @Override
@@ -50,6 +54,7 @@ public class AddFriendActivity extends BaseActivity implements AddFriendContract
         getMenuInflater().inflate(R.menu.menu_serach, menu);
         MenuItem item = menu.findItem(R.id.contact_serach);
         mSearchView = (SearchView) item.getActionView();
+        mSearchView.setQueryHint("请输入搜索关键字！");
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
@@ -59,6 +64,9 @@ public class AddFriendActivity extends BaseActivity implements AddFriendContract
                     return false;
                 }
                 mAddFriendPresenter.QueryContact(getUserName(), query);
+                InputMethodManager tmm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                tmm.hideSoftInputFromWindow(mSearchView.getWindowToken(),0);
+
                 return true;
             }
 
@@ -85,18 +93,42 @@ public class AddFriendActivity extends BaseActivity implements AddFriendContract
     }
 
     @Override
-    public void onQueryResult(List<User> resutl, boolean success, String msg, List<String> contacts) {
+    public void onQueryResult(List<User> resutl, boolean success, String msg, List<String>
+            contacts) {
+
+        if (success) {
+            mIv_nodata.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+        } else {
+            mIv_nodata.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+            return;
+        }
 
         if (mAddFriendAdapter == null) {
             mAddFriendAdapter = new AddFriendAdapter(resutl, this, contacts);
             mRecyclerView.setAdapter(mAddFriendAdapter);
-            mAddFriendAdapter.notifyDataSetChanged();
+            mAddFriendAdapter.setAddFriendListener(new AddFriendAdapter.AddFriendListener() {
+                @Override
+                public void onAddFriendClick(String username) {
+                    mAddFriendPresenter.addContact(username);
+                }
+            });
 
-        }else {
+        } else {
             mAddFriendAdapter.clean();
             mAddFriendAdapter.setUserList(resutl);
             mAddFriendAdapter.setContactList(contacts);
             mAddFriendAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onAddFriend(boolean success, String msg, String username) {
+        if (success) {
+            showToast("已邀请" + username + "成为好基友/姬友!");
+        } else {
+            showToast("邀请失败:" + msg);
         }
     }
 }

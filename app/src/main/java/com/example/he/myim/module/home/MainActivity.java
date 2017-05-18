@@ -1,6 +1,5 @@
 package com.example.he.myim.module.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -16,6 +15,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.he.myim.R;
 import com.example.he.myim.base.BaseActivity;
 import com.example.he.myim.base.BaseFragment;
+import com.example.he.myim.module.home.contact.AddFriendActivity;
 
 
 public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener{

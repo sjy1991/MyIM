@@ -69,7 +69,9 @@
             android:name=".module.login.LoginActivity"
             android:launchMode="singleTask"/>
         <activity android:name=".module.regist.RegistActivity"/>
-        <activity android:name=".module.home.AddFriendActivity">
+        <activity android:name=".module.home.contact.AddFriendActivity">
+        </activity>
+        <activity android:name=".module.home.chat.ChatActivity">
         </activity>
     </application>
 

@@ -1,4 +1,4 @@
-package com.example.he.myim.module.home;
+package com.example.he.myim.module.home.plugin;
 
 import com.example.he.myim.module.interfaze.CallBackLisenter;
 import com.hyphenate.chat.EMClient;

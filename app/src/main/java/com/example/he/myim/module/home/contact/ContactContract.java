@@ -1,4 +1,4 @@
-package com.example.he.myim.module.home;
+package com.example.he.myim.module.home.contact;
 
 import java.util.List;
 

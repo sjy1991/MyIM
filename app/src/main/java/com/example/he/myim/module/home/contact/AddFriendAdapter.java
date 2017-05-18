@@ -1,4 +1,4 @@
-package com.example.he.myim.module.home;
+package com.example.he.myim.module.home.contact;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +18,12 @@ import java.util.List;
  */
 
 public class AddFriendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    List<User> mUserList;
+    Context mContext;
+    List<String> mContactList;
+    AddFriendListener mAddFriendListener;
+
     public void setUserList(List<User> userList) {
         mUserList = userList;
     }
@@ -25,10 +31,6 @@ public class AddFriendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void setContactList(List<String> contactList) {
         mContactList = contactList;
     }
-
-    List<User> mUserList;
-    Context mContext;
-    List<String> mContactList;
 
     public AddFriendAdapter(List<User> userList, Context context, List<String> contactList) {
         mUserList = userList;
@@ -46,12 +48,20 @@ public class AddFriendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         AddFriendViewHolder viewHolder = (AddFriendViewHolder) holder;
-        User user = mUserList.get(position);
+        final User user = mUserList.get(position);
         if (mContactList.contains(user.userName)) {
             viewHolder.btn_add.setText("已添加");
             viewHolder.btn_add.setEnabled(false);
-        }else {
+        } else {
             viewHolder.btn_add.setText("添加");
+            viewHolder.btn_add.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mAddFriendListener != null) {
+                        mAddFriendListener.onAddFriendClick(user.userName);
+                    }
+                }
+            });
         }
         viewHolder.tv_date.setText(user.date);
         viewHolder.tv_username.setText(user.userName);
@@ -62,6 +72,12 @@ public class AddFriendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public int getItemCount() {
         return mUserList.size();
+    }
+
+    public void setAddFriendListener(AddFriendListener addFriendListener){
+        if (addFriendListener != null) {
+            mAddFriendListener = addFriendListener;
+        }
     }
 
     class AddFriendViewHolder extends RecyclerView.ViewHolder {
@@ -77,9 +93,15 @@ public class AddFriendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    public void clean(){
+    public void clean() {
         mContactList.clear();
         mUserList.clear();
+    }
+
+
+
+    interface AddFriendListener{
+        void onAddFriendClick(String username);
     }
 
 }
