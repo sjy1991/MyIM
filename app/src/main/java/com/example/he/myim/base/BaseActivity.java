@@ -27,11 +27,17 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void startActivity(Class clazz, boolean isFinish){
-        if (isFinish) {
-            startActivity(new Intent(this, clazz));
+        this.startActivity(clazz, isFinish, null);
+    }
+
+    public void startActivity(Class clazz, boolean finish, String contact){
+        Intent intent = new Intent(this, clazz);
+        if (contact != null) {
+            intent.putExtra("username", contact);
+        }
+        startActivity(intent);
+        if (finish) {
             finish();
-        }else {
-            startActivity(new Intent(this, clazz));
         }
     }
 

@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import com.example.he.myim.R;
 import com.example.he.myim.base.BaseFragment;
 import com.example.he.myim.evenbus.User;
+import com.example.he.myim.module.home.MainActivity;
+import com.example.he.myim.module.home.chat.ChatActivity;
 import com.example.he.myim.utils.ToastUtils;
 import com.example.he.myim.widget.ContactLayout;
 import com.hyphenate.chat.EMClient;
@@ -100,7 +102,8 @@ public class ContactFragment extends BaseFragment implements ContactContract.Con
 
     @Override
     public void onItemClick(String contact, int position) {
-
+        MainActivity activity = (MainActivity) getActivity();
+        activity.startActivity(ChatActivity.class, false, contact);
     }
 
 

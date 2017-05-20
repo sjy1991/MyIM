@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle("");
         flContent = (FrameLayout) findViewById(R.id.fl_content);
-        tvTtiile = (TextView) findViewById(R.id.tv_titile);
+        tvTtiile = (TextView) findViewById(R.id.tv_title);
         bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
         setSupportActionBar(mToolbar);
         tvTtiile.setText(titiles[0]);
