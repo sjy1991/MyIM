@@ -11,8 +11,14 @@ import java.util.List;
 public interface ChatContract {
     interface ChatView{
         void onInitChatRecord(List<EMMessage> msgRecords);
+
+        void onUpData(int msgRecords);
     }
     interface ChatPresenter{
         void initChatRecord(String contact);
+
+        void upDateChat(String username);
+
+        void sendMessage(String msg, String username);
     }
 }
