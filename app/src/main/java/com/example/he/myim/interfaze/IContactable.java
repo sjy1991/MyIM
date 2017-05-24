@@ -1,4 +1,4 @@
-package com.example.he.myim.module.interfaze;
+package com.example.he.myim.interfaze;
 
 import java.util.List;
 

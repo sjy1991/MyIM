@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.he.myim.R;
-import com.example.he.myim.module.interfaze.IContactable;
+import com.example.he.myim.interfaze.IContactable;
 
 import java.util.List;
 

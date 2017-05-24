@@ -4,7 +4,7 @@ import com.hyphenate.chat.EMMessage;
 
 import java.util.List;
 
-/**
+/*
  * Created by he on 17-5-19.
  */
 

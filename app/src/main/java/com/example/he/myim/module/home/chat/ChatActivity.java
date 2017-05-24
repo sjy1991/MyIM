@@ -24,7 +24,8 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
-public class ChatActivity extends BaseActivity implements ChatContract.ChatView, View
+public class
+   ChatActivity extends BaseActivity implements ChatContract.ChatView, View
         .OnClickListener{
 
     private Toolbar mToolbar;

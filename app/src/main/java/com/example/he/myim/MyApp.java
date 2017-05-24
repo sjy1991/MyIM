@@ -43,15 +43,15 @@ public class MyApp extends Application {
 
         initFriendsListener();
         initMsgListener();
-
     }
+
 
     private void initMsgListener() {
         EMClient.getInstance().chatManager().addMessageListener(new MessageListenerAdapter(){
             @Override
             public void onMessageReceived(List<EMMessage> messages) {
                 super.onMessageReceived(messages);
-                EventBus.getDefault().post(messages);
+                EventBus.getDefault().post(messages.get(0));
             }
         });
 

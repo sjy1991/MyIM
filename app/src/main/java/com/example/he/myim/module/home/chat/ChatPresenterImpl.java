@@ -1,9 +1,11 @@
 package com.example.he.myim.module.home.chat;
 
-import com.example.he.myim.module.interfaze.CallBackLisenter;
+import com.example.he.myim.interfaze.CallBackLisenter;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,6 +50,7 @@ public class ChatPresenterImpl implements ChatContract.ChatPresenter {
             mMsgRecords.add(lastMessage);
             mMsgRecords.addAll(emMessages);
             Collections.reverse(mMsgRecords);
+            EventBus.getDefault().post(lastMessage);
 
         } else {
             mMsgRecords.clear();
