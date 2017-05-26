@@ -1,15 +1,27 @@
 package com.example.he.myim;
 
+import android.app.ActivityManager;
 import android.app.Application;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.support.v4.app.NotificationCompat;
 
 import com.avos.avoscloud.AVOSCloud;
 import com.example.he.myim.evenbus.User;
+import com.example.he.myim.module.home.MainActivity;
+import com.example.he.myim.module.home.chat.ChatActivity;
 import com.example.he.myim.module.home.chat.MessageListenerAdapter;
 import com.example.he.myim.utils.DbUtil;
 import com.hyphenate.EMContactListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMOptions;
+import com.hyphenate.chat.EMTextMessageBody;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -23,6 +35,11 @@ public class MyApp extends Application {
 
     private static final String APP_ID = "qAx8oDYFdCYxIV4nabIAlsPf-gzGzoHsz";
     private static final String APP_KEY = "rLQEKA3vK4TbP2sXrM9edwpn";
+    private SoundPool mSoundPool;
+    private int mDuan;
+    private int mYulu;
+    private boolean isRunBackground;
+    private NotificationManager mNm;
 
     @Override
     public void onCreate() {
@@ -41,19 +58,75 @@ public class MyApp extends Application {
 
         DbUtil.init(this);
 
+        initSoundPool();
         initFriendsListener();
         initMsgListener();
     }
 
 
+    /**
+     * 加载声音资源
+     */
+    private void initSoundPool() {
+        mSoundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
+        mDuan = mSoundPool.load(this, R.raw.duan, 1);
+        mYulu = mSoundPool.load(this, R.raw.yulu, 1);
+
+    }
+
+
     private void initMsgListener() {
-        EMClient.getInstance().chatManager().addMessageListener(new MessageListenerAdapter(){
+        EMClient.getInstance().chatManager().addMessageListener(new MessageListenerAdapter() {
             @Override
             public void onMessageReceived(List<EMMessage> messages) {
                 super.onMessageReceived(messages);
-                EventBus.getDefault().post(messages.get(0));
+
+                EMMessage emMessage = messages.get(0);
+                EventBus.getDefault().post(emMessage);
+                String from = emMessage.getFrom();
+                EMTextMessageBody body = (EMTextMessageBody) emMessage.getBody();
+                String message = body.getMessage();
+                checkRunBackground();
+                if (isRunBackground) {
+                    if (mNm == null) {
+                        mNm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                    }
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(MyApp.this);
+                    builder.setContentTitle("你有新的消息");
+                    builder.setContentInfo(from);
+                    builder.setContentText(message);
+                    builder.setSmallIcon(R.drawable.avatar_left);
+                    builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable
+                            .default_avatar));
+                    builder.setAutoCancel(true);
+
+                    Intent mainIntent = new Intent(MyApp.this, MainActivity.class);
+                    Intent chatIntent = new Intent(MyApp.this, ChatActivity .class);
+                    chatIntent.putExtra("username", from);
+                    Intent[] intents = new Intent[2];
+                    intents[0] = mainIntent;
+                    intents[1] = chatIntent;
+                    PendingIntent activities = PendingIntent.getActivities(MyApp.this, 1,
+                            intents, PendingIntent.FLAG_UPDATE_CURRENT);
+                    builder.setContentIntent(activities);
+
+                    mNm.notify(1, builder.build());
+                }
             }
         });
+
+    }
+
+    private void checkRunBackground() {
+        ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> runningTasks = am.getRunningTasks(100);
+
+        ComponentName topActivity = runningTasks.get(0).topActivity;
+        if (topActivity.getPackageName().equals(getPackageName())) {
+            isRunBackground = false;
+        } else {
+            isRunBackground = true;
+        }
 
     }
 
