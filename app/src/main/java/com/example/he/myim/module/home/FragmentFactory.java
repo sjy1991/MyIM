@@ -15,7 +15,7 @@ public class FragmentFactory {
     private static ConversationFragment sConversationFragment = null;
     private static PluginFragment sPluginFragment = null;
 
-    private FragmentFactory(){};
+    private FragmentFactory(){}
 
 
     /**
