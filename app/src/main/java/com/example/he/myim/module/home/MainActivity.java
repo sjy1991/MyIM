@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     @Override
     protected void onResume() {
         super.onResume();
-        unDataUnread();
+        upDataUnread();
     }
 
     private void init() {
@@ -104,7 +104,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(EMMessage message){
-        unDataUnread();
+        upDataUnread();
     }
 
     @Override
@@ -168,7 +168,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     }
 
-    private void unDataUnread(){
+    public void upDataUnread(){
         int unreadCount = EMClient.getInstance().chatManager().getUnreadMessageCount();
         if (unreadCount > 99) {
             mBadgeItem.setText("99+");
@@ -186,4 +186,5 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+
 }

@@ -1,6 +1,6 @@
 package com.example.he.myim.base;
 
-import android.app.ProgressDialog;
+import android.app.*;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -22,6 +22,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppManager.add(this);
         mProgressDialog = new ProgressDialog(this);
         mSharedPreferences = getSharedPreferences(Constant.SP_NAEM, MODE_PRIVATE);
     }
@@ -54,6 +55,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        AppManager.remove(this);
         mProgressDialog.dismiss();
     }
 

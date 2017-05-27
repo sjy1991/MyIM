@@ -17,6 +17,7 @@ import com.example.he.myim.module.home.chat.ChatActivity;
 import com.example.he.myim.utils.ToastUtils;
 import com.example.he.myim.widget.ContactLayout;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMConversation;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -104,6 +105,10 @@ public class ContactFragment extends BaseFragment implements ContactContract.Con
     public void onItemClick(String contact, int position) {
         MainActivity activity = (MainActivity) getActivity();
         activity.startActivity(ChatActivity.class, false, contact);
+        EMConversation conversation = EMClient.getInstance().chatManager().getConversation(contact);
+        if (conversation != null) {
+            conversation.markAllMessagesAsRead();
+        }
     }
 
 
@@ -120,6 +125,7 @@ public class ContactFragment extends BaseFragment implements ContactContract.Con
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        mContactAdapter = null;
     }
 
 
