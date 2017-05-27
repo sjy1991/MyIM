@@ -1,0 +1,43 @@
+{
+  "project_info": {
+    "project_number": "303466846107",
+    "project_id": "firebase-myim"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303466846107:android:974d50c028c36262",
+        "android_client_info": {
+          "package_name": "com.example.he.myim"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "303466846107-d75u67gamp75iqadtnqhk0t50bnv6l9e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBu8N0nzlcjjBz9OosYb7FZiwcoIOsSkuY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-99966358-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

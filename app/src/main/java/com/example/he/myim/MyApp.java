@@ -12,12 +12,17 @@ import android.media.SoundPool;
 import android.support.v4.app.NotificationCompat;
 
 import com.avos.avoscloud.AVOSCloud;
+import com.example.he.myim.base.AppManager;
 import com.example.he.myim.evenbus.User;
 import com.example.he.myim.module.home.MainActivity;
 import com.example.he.myim.module.home.chat.ChatActivity;
 import com.example.he.myim.module.home.chat.MessageListenerAdapter;
+import com.example.he.myim.module.login.LoginActivity;
 import com.example.he.myim.utils.DbUtil;
+import com.example.he.myim.utils.ToastUtils;
+import com.hyphenate.EMConnectionListener;
 import com.hyphenate.EMContactListener;
+import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMOptions;
@@ -61,6 +66,32 @@ public class MyApp extends Application {
         initSoundPool();
         initFriendsListener();
         initMsgListener();
+        initConnectionListener();
+    }
+
+    /**
+     * 监听连接状态
+     */
+    private void initConnectionListener() {
+        EMClient.getInstance().addConnectionListener(new EMConnectionListener() {
+            @Override
+            public void onConnected() {
+
+            }
+
+            @Override
+            public void onDisconnected(int errorCode) {
+                if (errorCode == EMError.USER_LOGIN_ANOTHER_DEVICE) {
+                    ToastUtils.showToast(MyApp.this, "帐号在其他设备登录了");
+                    // 清空所有activity
+
+                    Intent intent = new Intent(MyApp.this, LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    AppManager.finishAll();
+                }
+            }
+        });
     }
 
 

@@ -1,8 +1,10 @@
 package com.example.he.myim.module.home.conversation;
 
 
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +14,8 @@ import android.view.ViewGroup;
 
 import com.example.he.myim.R;
 import com.example.he.myim.base.BaseFragment;
+import com.example.he.myim.module.home.MainActivity;
+import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
 
@@ -25,13 +29,14 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ConversationFragment extends BaseFragment implements ConversationContract.ConversationView{
+public class ConversationFragment extends BaseFragment implements ConversationContract.ConversationView, View.OnClickListener {
 
 
 
     private RecyclerView mRv_conversation;
     private ConversationAdapter mConversationAdapter;
     private ConversationContract.ConversationPresenter mConversationPresenter;
+    private FloatingActionButton mFab;
 
     public static ConversationFragment newInstance(){
         return new ConversationFragment();
@@ -49,6 +54,8 @@ public class ConversationFragment extends BaseFragment implements ConversationCo
         super.onViewCreated(view, savedInstanceState);
         mRv_conversation = (RecyclerView) view.findViewById(R.id.rv_conversation);
         mRv_conversation.setLayoutManager(new LinearLayoutManager(getContext()));
+        mFab = (FloatingActionButton) view.findViewById(R.id.fab);
+        mFab.setOnClickListener(this);
         mConversationPresenter = new ConversationPresenterImpl(this);
         mConversationPresenter.initConverstaion();
         EventBus.getDefault().register(this);
@@ -74,5 +81,15 @@ public class ConversationFragment extends BaseFragment implements ConversationCo
     public void onDestroyView() {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
+        mConversationAdapter = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        EMClient.getInstance().chatManager().markAllConversationsAsRead();
+        ObjectAnimator.ofFloat(mFab,"rotation", 0, 360).setDuration(2000).start();
+        mConversationPresenter.initConverstaion();
+        MainActivity activity = (MainActivity) getActivity();
+        activity.upDataUnread();
     }
 }
