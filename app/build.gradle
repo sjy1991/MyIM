@@ -60,4 +60,5 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     testCompile 'junit:junit:4.12'
     compile 'com.google.android.gms:play-services-analytics:9.0.0'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
 }

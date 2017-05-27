@@ -185,6 +185,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+
     }
 
 }

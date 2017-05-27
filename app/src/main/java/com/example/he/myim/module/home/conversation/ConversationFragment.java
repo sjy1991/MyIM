@@ -82,6 +82,8 @@ public class ConversationFragment extends BaseFragment implements ConversationCo
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
         mConversationAdapter = null;
+        mFab.setOnClickListener(null);
+        mFab = null;
     }
 
     @Override

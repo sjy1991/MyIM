@@ -15,17 +15,19 @@ public class FragmentFactory {
     private static ConversationFragment sConversationFragment = null;
     private static PluginFragment sPluginFragment = null;
 
-    private FragmentFactory(){}
+    private FragmentFactory() {
+    }
 
 
     /**
      * 根据需求生产订单
+     *
      * @param position
      * @return
      */
-    public static BaseFragment getFragment(int position){
+    public static BaseFragment getFragment(int position) {
         BaseFragment fragment = null;
-        switch (position){
+        switch (position) {
             case 0:
                 if (sConversationFragment == null) {
                     sConversationFragment = ConversationFragment.newInstance();
@@ -43,7 +45,7 @@ public class FragmentFactory {
 
             case 2:
                 if (sPluginFragment == null) {
-                    sPluginFragment = sPluginFragment.newInstance();
+                    sPluginFragment = PluginFragment.newInstance();
                 }
                 fragment = sPluginFragment;
 
@@ -55,5 +57,6 @@ public class FragmentFactory {
         }
         return fragment;
     }
+
 
 }

@@ -18,7 +18,7 @@ import com.example.he.myim.utils.ToastUtils;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PluginFragment extends BaseFragment implements PluginContract.PluginView {
+public class PluginFragment extends BaseFragment implements PluginContract.PluginView, View.OnClickListener{
     private Button btn_logout;
     private PluginContract.PluginPresenter mPluginPresenter;
 
@@ -32,14 +32,7 @@ public class PluginFragment extends BaseFragment implements PluginContract.Plugi
         mPluginPresenter = new PluginPresenterImpl(this);
         View view = inflater.inflate(R.layout.fragment_plugin, container, false);
         btn_logout = (Button) view.findViewById(R.id.btn_login_out);
-        btn_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity)getActivity()).showProgressDialog("正在紧张的退出...");
-
-                mPluginPresenter.lougou();
-            }
-        });
+        btn_logout.setOnClickListener(this);
 
         return view;
     }
@@ -52,14 +45,23 @@ public class PluginFragment extends BaseFragment implements PluginContract.Plugi
         if (isSuccess) {
             MainActivity activity = (MainActivity) getActivity();
             activity.startActivity(LoginActivity.class, true);
+            activity = null;
         } else {
             ToastUtils.showToast(getContext(), "退出失败:" + msg);
         }
+
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         btn_logout.setOnClickListener(null);
+        btn_logout = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        ((MainActivity)getActivity()).showProgressDialog("正在紧张的退出...");
+        mPluginPresenter.lougou();
     }
 }
